@@ -55,7 +55,11 @@ When a user applies as a Driver or Merchant, their application is stored in the 
 
 clone the project on your desired folder location cd
 
-```git clone https://github.com/JobParado/BiteRide```
+```bash
+git clone https://github.com/JobParado/BiteRide
+```
+
+
 
 ## 🗃 Database Setup
 
