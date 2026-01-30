@@ -104,7 +104,7 @@ This project helped us explore:
 | Section | Suggested Screenshot |
 |--------|-----------------------|
 | Account Creation | <img src="Bite Ride/img/create account.png" width="300"/> |
-| Login Page | <img src="Bite Ride/img/login.png"  page" width="300"/> |
+| Login Page | <img src="Bite Ride/img/login.png" width="300"/> |
 | Driver Registration | <img src="Bite Ride/img/driver page 1.png" width="300"/> <img src="Bite Ride/img/driver page 2.png"  width="300"/> <img src="Bite Ride/img/driver page 3.png" width="300"/> |
 | Merchant Registration | <img src="Bite Ride/img/merchant page 1.png" width="300"/> |
 | Home Page | <img src="Bite Ride/img/user homepage.png"  width="300"/> |
