@@ -86,7 +86,7 @@ Edit the following file (turn this into ( .env) .TXT) based on your credentials 
 
 | Section | Suggested Screenshot |
 |--------|-----------------------|
-| Account Creation | "CREATE YOUR ACCOUNT" form |
+| Account Creation | <img src="Bite Ride/img/create account.png" alt="create account page" width="300"/> |
 | Login Page | BiteRide login interface |
 | Driver Registration | Page 1–3 of "Sign Up Driver Page" |
 | Merchant Registration | "Sign Up Merchant Page" form |
