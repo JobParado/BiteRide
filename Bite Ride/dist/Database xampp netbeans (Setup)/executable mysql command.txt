@@ -1,0 +1,79 @@
+create table account
+(
+	phonenumber VARCHAR(50) not null,
+	firstname VARCHAR(50) not null,
+	surname VARCHAR(50) not null,
+	password VARCHAR(500) not null,
+	role VARCHAR(50)
+)
+
+
+create table booking
+(
+	userfullname VARCHAR(50) not null,
+	userphonenumber VARCHAR(50) not null,
+	pickuplocation VARCHAR(50) not null,
+	dropofflocation VARCHAR(50) not null,
+	orderfood VARCHAR(50) not null,
+	cost VARCHAR(50) not null,
+	vehicle VARCHAR(50) not null,
+	bookingid VARCHAR(50) not null,
+	driverfullname VARCHAR(50),
+	drivernumber VARCHAR(50)
+)
+
+
+create table driver
+(
+	phonenumber VARCHAR(50) not null,
+	vehicletype VARCHAR(50) not null,
+	time VARCHAR(50) not null,
+	firstname VARCHAR(50) not null,
+	middlename VARCHAR(50) not null,
+	lastname VARCHAR(50) not null,
+	age VARCHAR(50) not null,
+	sex VARCHAR(50) not null,
+	emailaddress VARCHAR(50) not null,
+	address VARCHAR(50) not null,
+	barangay VARCHAR(50) not null,
+	ssidnumber VARCHAR(50) not null,
+	licensetype VARCHAR(50) not null,
+	licensenumber VARCHAR(50) not null,
+	licenseexpiredate VARCHAR(50) not null
+)
+
+
+create table feedback
+(
+	fullname VARCHAR(50) not null,
+	phonenumber VARCHAR(50) not null,
+	message VARCHAR(50) not null
+)
+
+
+create table foodorder
+(
+	foodname VARCHAR(50) not null,
+	orderamount VARCHAR(50) not null,
+	totalcost VARCHAR(50) not null,
+	userfullname VARCHAR(50) not null,
+	userphonenumber VARCHAR(50) not null,
+	bookingid VARCHAR(50) not null,
+	variant VARCHAR(50) not null,
+	merchantfullname VARCHAR(50),
+	merchantnumber VARCHAR(50),
+	driverfullname VARCHAR(50),
+	drivernumber VARCHAR(50)
+)
+
+
+create table merchant
+(
+	phonenumber VARCHAR(50) not null,
+	firstname VARCHAR(50) not null,
+	middlename VARCHAR(50) not null,
+	lastname VARCHAR(50) not null,
+	businessname VARCHAR(50) not null,
+	businessaddress VARCHAR(50) not null,
+	businesspermit VARCHAR(50) not null
+)

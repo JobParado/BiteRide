@@ -1,0 +1,481 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Bite_Ride;
+
+import io.github.cdimascio.dotenv.Dotenv;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author job parado
+ */
+public class MerchantHomePage extends javax.swing.JFrame {
+
+    DefaultTableModel model2;
+    
+    
+    Dotenv dotenv = Dotenv.load();
+    String url = dotenv.get("Database_URL");
+    String user = dotenv.get("Admin_Name");
+    String pass = dotenv.get("Admin_Password");
+    
+     /**
+     * Creates new form HomePage
+     */
+    public MerchantHomePage() {
+        initComponents();
+        model2 = (DefaultTableModel)foodOrderList.getModel();
+    }
+
+     // fullname displayer for the homepage
+    public void DisplayFullName(String firstname,String surname) {
+        txtFullName.setText(firstname + " " + surname);
+    }
+
+    private String phoneNumber,firstname,surname,password,role;
+
+    // one setter for account
+
+    
+    public void SetAccount(String phoneNumber,String firstname , String surname,String password,String role) {
+        this.phoneNumber=phoneNumber;
+        this.firstname=firstname;
+        this.surname=surname;
+        this.password=password;
+        this.role=role;
+    }
+
+    public void displayUserFoodOrderList() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+    
+            Connection connection = DriverManager.getConnection(url, user, pass);
+    
+            String query = "SELECT * FROM foodorder";
+            PreparedStatement statement = connection.prepareStatement(query);
+    
+            ResultSet resultSet = statement.executeQuery();
+    
+            model2.setRowCount(0);
+            cmbBookingList.removeAllItems();
+            Set<String> uniqueBookingIds = new HashSet<>();
+
+            while (resultSet.next()) {
+                String foodname = resultSet.getString("foodname");
+                String variant = resultSet.getString("variant");
+                String orderAmount = resultSet.getString("orderamount");
+                String totalcost = resultSet.getString("totalcost");
+                String usersFullName = resultSet.getString("userfullname");
+                String usersPhoneNumber = resultSet.getString("userphonenumber");
+                String bookingId = resultSet.getString("bookingid");
+                String merchantName= resultSet.getString("merchantfullname");
+                String merchantNumber = resultSet.getString("merchantnumber");
+                String driverName= resultSet.getString("driverfullname");
+                String driverNumber = resultSet.getString("drivernumber");
+
+
+                String currentFullName = firstname + " " + surname;
+                String currentPhoneNumber = phoneNumber;
+
+                if(!(currentFullName.equals(usersFullName) && currentPhoneNumber.equals(usersPhoneNumber))) {
+                    model2.insertRow(model2.getRowCount(),new String[] {usersFullName,usersPhoneNumber,foodname,variant,orderAmount,totalcost,bookingId,merchantName,merchantNumber,driverName,driverNumber});
+                    if (merchantName == null && merchantNumber == null) {
+                        uniqueBookingIds.add(bookingId);
+                    }
+                }
+
+
+            }
+
+            for (String uniqueBookingId : uniqueBookingIds) {
+                cmbBookingList.addItem(uniqueBookingId);
+            }
+    
+            resultSet.close();
+            statement.close();
+            connection.close();
+        } catch (ClassNotFoundException | SQLException e) {
+        }
+    }
+
+
+    public void insertAcceptedToOrder(String fullname,String phoneNumber) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            try (Connection connection = DriverManager.getConnection(url, user, pass)) {
+                String query = "UPDATE foodorder SET merchantfullname = ?, merchantnumber = ? WHERE bookingid = ?";
+                
+                try (PreparedStatement statement = connection.prepareStatement(query)) {
+
+                    statement.setString(1, fullname);
+                    statement.setString(2, phoneNumber);
+                    statement.setString(3, cmbBookingList.getSelectedItem().toString());
+                    
+                    statement.executeUpdate();
+
+                }
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        black = new javax.swing.JPanel();
+        jobs = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jobsForYou = new javax.swing.JPanel();
+        btnRefresh = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        userfoodordertable = new javax.swing.JScrollPane();
+        foodOrderList = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
+        cmbBookingList = new javax.swing.JComboBox<>();
+        btnAcceptBooking = new javax.swing.JButton();
+        txtFullName = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        userIcon = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnSettings = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Merchant Home Page");
+        setBackground(new java.awt.Color(0, 0, 0));
+        setResizable(false);
+
+        black.setBackground(new java.awt.Color(0, 0, 0));
+
+        jobs.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setFocusable(false);
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jobsForYou.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.setFocusable(false);
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("User's Food Order");
+
+        foodOrderList.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        foodOrderList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "User's Fullname", "User's Number", "Foodname", "Variant", "Orderamount", "Totalcost", "Booking ID", "Merchant FullName", "Merchant Number", "Driver FullName", "Driver Number"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        foodOrderList.getTableHeader().setResizingAllowed(false);
+        foodOrderList.getTableHeader().setReorderingAllowed(false);
+        userfoodordertable.setViewportView(foodOrderList);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Choose Booking ID to Accept");
+
+        btnAcceptBooking.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAcceptBooking.setText("Accept Booking");
+        btnAcceptBooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAcceptBookingActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jobsForYouLayout = new javax.swing.GroupLayout(jobsForYou);
+        jobsForYou.setLayout(jobsForYouLayout);
+        jobsForYouLayout.setHorizontalGroup(
+            jobsForYouLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(userfoodordertable, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1296, Short.MAX_VALUE)
+            .addGroup(jobsForYouLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jobsForYouLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jobsForYouLayout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRefresh))
+                    .addGroup(jobsForYouLayout.createSequentialGroup()
+                        .addGroup(jobsForYouLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jobsForYouLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbBookingList, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jobsForYouLayout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addComponent(btnAcceptBooking)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jobsForYouLayout.setVerticalGroup(
+            jobsForYouLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jobsForYouLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jobsForYouLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRefresh)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(userfoodordertable, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmbBookingList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAcceptBooking)
+                .addGap(44, 44, 44))
+        );
+
+        jTabbedPane1.addTab("Jobs For You As Merchant", jobsForYou);
+
+        javax.swing.GroupLayout jobsLayout = new javax.swing.GroupLayout(jobs);
+        jobs.setLayout(jobsLayout);
+        jobsLayout.setHorizontalGroup(
+            jobsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        jobsLayout.setVerticalGroup(
+            jobsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobsLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        txtFullName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtFullName.setForeground(new java.awt.Color(255, 255, 255));
+        txtFullName.setText("firstname surname");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Feed Page");
+
+        userIcon.setForeground(new java.awt.Color(255, 255, 255));
+        userIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/userIcon.png"))); // NOI18N
+        userIcon.setFocusable(false);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Ready to assist our Customer?");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Check their booking now");
+
+        btnSettings.setBackground(new java.awt.Color(0, 0, 0));
+        btnSettings.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hiclipart.com.png"))); // NOI18N
+        btnSettings.setBorderPainted(false);
+        btnSettings.setContentAreaFilled(false);
+        btnSettings.setFocusable(false);
+        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSettingsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout blackLayout = new javax.swing.GroupLayout(black);
+        black.setLayout(blackLayout);
+        blackLayout.setHorizontalGroup(
+            blackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jobs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(blackLayout.createSequentialGroup()
+                .addGroup(blackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(blackLayout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(blackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFullName)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, blackLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(blackLayout.createSequentialGroup()
+                .addGap(479, 479, 479)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        blackLayout.setVerticalGroup(
+            blackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(blackLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jLabel2)
+                .addGap(1, 1, 1)
+                .addGroup(blackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(userIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(blackLayout.createSequentialGroup()
+                        .addComponent(txtFullName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)))
+                .addGap(18, 18, 18)
+                .addComponent(jobs, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSettings, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(black, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(black, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSettingsActionPerformed
+        // TODO add your handling code here:
+        
+               
+        this.dispose();
+        SettingsPage settingsPage = new SettingsPage();
+        
+        settingsPage.SetAccount(phoneNumber, firstname, surname, password);
+        settingsPage.DisplayAccountInformation();
+        settingsPage.setRole(role);
+        settingsPage.setVisible(true);
+        txtFullName.setText("");
+        
+    }//GEN-LAST:event_btnSettingsActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        // TODO add your handling code here:
+
+        displayUserFoodOrderList();
+
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnAcceptBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptBookingActionPerformed
+        // TODO add your handling code here:
+        try {
+
+        int confirmation =JOptionPane.showConfirmDialog(null,"Accept This Booking ID ? " + cmbBookingList.getSelectedItem().toString());
+
+        if(confirmation == 0) {
+            insertAcceptedToOrder(firstname + " " + surname, phoneNumber);
+            JOptionPane.showMessageDialog(null, "Booking Accepted!");
+            displayUserFoodOrderList();
+        }
+        
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        
+
+    }//GEN-LAST:event_btnAcceptBookingActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MerchantHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MerchantHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MerchantHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MerchantHomePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MerchantHomePage().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel black;
+    private javax.swing.JButton btnAcceptBooking;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnSettings;
+    private javax.swing.JComboBox<String> cmbBookingList;
+    private javax.swing.JTable foodOrderList;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jobs;
+    private javax.swing.JPanel jobsForYou;
+    private javax.swing.JLabel txtFullName;
+    private javax.swing.JButton userIcon;
+    private javax.swing.JScrollPane userfoodordertable;
+    // End of variables declaration//GEN-END:variables
+}
