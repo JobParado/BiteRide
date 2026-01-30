@@ -49,6 +49,11 @@ When a user applies as a Driver or Merchant, their application is stored in the 
 - Settings page for account updates and feedback
 
 ---
+## 🚀 Getting Started
+
+clone the project on your desired folder location cd
+
+Run `git clone https://github.com/username/repo.git`
 
 ## 🗃 Database Setup
 
