@@ -1,5 +1,5 @@
 # BiteRide: Eat While You Ride  
-**Java Desktop App | NetBeans + MySQL **
+<h2>Java Desktop App | NetBeans + MySQL</h2>
 
 ## 📘 Project Overview
 
