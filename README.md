@@ -52,18 +52,18 @@ When a user applies as a Driver or Merchant, their application is stored in the 
 
 | Section | Suggested Screenshot |
 |--------|-----------------------|
-| Account Creation | <img src="Bite Ride/img/create account.png" alt="create account page" width="150"/> |
-| Login Page | BiteRide login interface |
-| Driver Registration | Page 1–3 of "Sign Up Driver Page" |
-| Merchant Registration | "Sign Up Merchant Page" form |
-| Home Page | "Home Page" with Transportation + Package options |
-| Booking Setup | "Set Your Location" or "Confirm Your Booking" |
-| Food Ordering | "Order Your Food And Confirm Your Booking" |
-| Driver Dashboard | "Driver Home Page" with booking tables |
-| Merchant Dashboard | "Merchant Home Page" with food order table |
-| Transaction Page | "Transaction Page" with booking and food tables |
-| Settings Page | "Settings Page" with account update options |
-| `.env` Setup | Screenshot of `.env` file in VS Code |
+| Account Creation | <img src="Bite Ride/img/create account.png" alt="create account page" width="300"/> |
+| Login Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Driver Registration | <img src="Bite Ride/img/driver page 1.png" alt="create account page" width="300"/> <img src="Bite Ride/img/driver page 2.png" alt="create account page" width="300"/> <img src="Bite Ride/img/driver page 3.png" alt="create account page" width="300"/> |
+| Merchant Registration | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Home Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Booking Setup | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Food Ordering | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Driver Dashboard | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Merchant Dashboard | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Transaction Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| Settings Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
+| `.env` Setup | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
 
 ---
 ## 🚀 Getting Started
