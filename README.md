@@ -3,7 +3,8 @@
 
 ## 📘 Project Overview
 
-**BiteRide** is a desktop application built in Java using Apache NetBeans IDE 25. It was developed as a collaborative school project based on a classmate’s idea: a hybrid service that lets users book transportation and order food simultaneously—so meals arrive while they’re on the ride.
+**BiteRide** is a desktop application built in Java using Apache NetBeans IDE 25. I was the one developed it as a collaborative school project for research based on our classmate project leader idea:
+a hybrid service that lets users book transportation and order food simultaneously—so meals arrive while they’re on the ride.
 
 This project demonstrates:
 - GUI development with Java Swing  
@@ -48,22 +49,6 @@ When a user applies as a Driver or Merchant, their application is stored in the 
 - Transaction dashboards for drivers and merchants  
 - Settings page for account updates and feedback
 
-## 🖼️ Images of Application
-
-| Section | Suggested Screenshot |
-|--------|-----------------------|
-| Account Creation | <img src="Bite Ride/img/create account.png" alt="create account page" width="300"/> |
-| Login Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Driver Registration | <img src="Bite Ride/img/driver page 1.png" alt="create account page" width="300"/> <img src="Bite Ride/img/driver page 2.png" alt="create account page" width="300"/> <img src="Bite Ride/img/driver page 3.png" alt="create account page" width="300"/> |
-| Merchant Registration | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Home Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Booking Setup | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Food Ordering | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Driver Dashboard | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Merchant Dashboard | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Transaction Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| Settings Page | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
-| `.env` Setup | <img src="Bite Ride/img/login.png" alt="create account page" width="300"/> |
 
 ---
 ## 🚀 Getting Started
@@ -114,12 +99,21 @@ This project helped us explore:
 - Structuring readable, maintainable Java code  
 
 ---
+## 🖼️ Images of Application
 
-## 📌 Notes
-
-- This project was built for academic demonstration purposes.  
-- Some features may be mockups or partially implemented.  
-- The `.env` file must be manually created before running the JAR.  
-- Role-based redirection is handled via database role assignment.
+| Section | Suggested Screenshot |
+|--------|-----------------------|
+| Account Creation | <img src="Bite Ride/img/create account.png" width="300"/> |
+| Login Page | <img src="Bite Ride/img/login.png"  page" width="300"/> |
+| Driver Registration | <img src="Bite Ride/img/driver page 1.png" width="300"/> <img src="Bite Ride/img/driver page 2.png"  width="300"/> <img src="Bite Ride/img/driver page 3.png" width="300"/> |
+| Merchant Registration | <img src="Bite Ride/img/merchant page 1.png" width="300"/> |
+| Home Page | <img src="Bite Ride/img/user homepage.png"  width="300"/> |
+| Booking Setup | <img src="Bite Ride/img/user package part 1.png"  width="300"/> |
+| Food Ordering | <img src="Bite Ride/img/user package part 2.png"  width="300"/> |
+| Driver Dashboard | <img src="Bite Ride/img/driver home page.png"  width="300"/> |
+| Merchant Dashboard | <img src="Bite Ride/img/merchant home page.png"  width="300"/> |
+| Transaction Page | <img src="Bite Ride/img/user transaction.png"  width="300"/> |
+| Settings Page | <img src="Bite Ride/img/settings.png"  width="300"/> <img src="Bite Ride/img/setting update.png"  width="300"/> <img src="Bite Ride/img/settings apply.png"  width="300"/> |
+| `.env` Setup | <img src="Bite Ride/img/env setup.png" width="300"/> |
 
 ---
